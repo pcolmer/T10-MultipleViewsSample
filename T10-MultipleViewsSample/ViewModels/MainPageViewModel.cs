@@ -30,8 +30,10 @@ namespace T10_MultipleViewsSample.ViewModels
         public void NavigateToPage2() =>
             NavigationService.Navigate(typeof(Views.Page2));
 
-        public void Page2InNewWindow() =>
-            NavigationService.OpenAsync(typeof(Views.Page2));
+        public async void Page2InNewWindow()
+        {
+            await NavigationService.OpenAsync(typeof(Views.Page2));
+        }
     }
 }
 

@@ -34,12 +34,29 @@ namespace T10_MultipleViewsSample.ViewModels
         public void NavigateToPage3() =>
             NavigationService.Navigate(typeof(Views.Page3));
 
+        // Declare a couple of properties to show how deep the stack is
+        // and what the pages are on the stack.
         public int StackDepth
         {
             get
             {
                 Debug.WriteLine($"{nameof(StackDepth)}");
                 return NavigationService?.FrameFacade?.BackStackDepth ?? -1;
+            }
+        }
+
+        public List<string> StackFrames
+        {
+            get
+            {
+                var framestack = NavigationService?.FrameFacade?.Frame?.BackStack;
+                List<string> result = new List<string>();
+                if (framestack != null)
+                    foreach (var frame in framestack)
+                    {
+                        result.Add(frame.SourcePageType.FullName);
+                    }
+                return result;
             }
         }
     }
